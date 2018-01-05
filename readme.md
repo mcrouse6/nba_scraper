@@ -1,6 +1,6 @@
-# 2017-2018 ESPN NBA Fantasy Scapper
+# 2017-2018 ESPN NBA Fantasy Scaper
 
-This is a quick, dirty hack for getting active rosters from a public league. This is flimsy and will break but to install and run:
+This is a quick, dirty hack for getting active rosters from a public ESPN NBA fantasy league. This is flimsy and will break but to install and run:
 
 ```bash
 virtualenv --python=/usr/bin/python2.7 env
