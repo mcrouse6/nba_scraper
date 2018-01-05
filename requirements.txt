@@ -1,0 +1,7 @@
+beautifulsoup4==4.6.0
+bs4==0.0.1
+numpy==1.13.3
+pandas==0.20.3
+python-dateutil==2.6.1
+requests==2.18.4
+scipy==0.19.1
