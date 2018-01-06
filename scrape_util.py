@@ -59,9 +59,9 @@ def getStatsByManagerId(teamId):
 def getAllRosterInfo():
     data = []
     for i in range(14):
-        print i
+        #print i
         pf = getStatsByManagerId(i+1)        
-        print pf
+        #print pf
         data.append(pf)
 
     result = pd.concat(data)
@@ -97,12 +97,12 @@ def getCurrentStandings():
         teamId = int(teaminfo['href'].split('&')[-2].split('=')[1])
         data = [teamId, name]
         for i, stat in enumerate(stats):
-            print cat_list[i], stat.text
+            #print cat_list[i], stat.text
             data.append(stat.text)
 
         stats = row.find_all('td')[len(cat_list)+4:]
         for i, stat in enumerate(stats):
-            print summary_info[i], stat.text
+            #print summary_info[i], stat.text
             data.append(stat.text)
         
         all_data.append(data)
@@ -117,23 +117,24 @@ def getCurrentStandings():
     rows = stats_table.find_all('tr')[3:]
     all_data = []
     for row in rows:
-        print row.find('a').text
+        #print row.find('a').text
         teaminfo = row.find('a')
         name = teaminfo.text
         teamId = int(teaminfo['href'].split('&')[-2].split('=')[1])
         stats = row.find_all('td')[3:-3]
         data = [teamId, name]
         for i, stat in enumerate(stats):
-            print cat_list[i], stat.text
+            #print cat_list[i], stat.text
             data.append(stat.text)
 
         stats = row.find_all('td')[-2:]
         for i, stat in enumerate(stats):
-            print other_info[i], stat.text
+            #print other_info[i], stat.text
             data.append(stat.text)
         all_data.append(data)
 
     stat_summary = pd.DataFrame.from_records(all_data, columns=base_info + cat_list + summary_info)
+
     directory = "2017-2018_data/summaries"
     if not os.path.exists(directory):
         os.makedirs(directory)
@@ -141,6 +142,9 @@ def getCurrentStandings():
 
     return standings, stat_summary
 
-
-active_rosters = getAllRosterInfo()
-standings, stat_summary = getCurrentStandings()
+if __name__ == "__main__":
+    print "Running Snapshot %s" %  time.strftime("%b %d - %I:%M")
+    print "Fetching Active Roster Info"
+    active_rosters = getAllRosterInfo()
+    print "Fetching Standings and Overall Statistics Snapshot"
+    standings, stat_summary = getCurrentStandings()
